@@ -30,15 +30,26 @@ public class TodosClientAPI {
 
     @PostMapping("/")
     public Todo createTodo(@RequestBody Todo todo) {
-        long now = System.currentTimeMillis();
-        LOG.debug("Calling " + targetEndpoint +  " to create Todo " + todo.toString());
+
         ResponseEntity<Todo> responseEntity = this.restTemplate
             .postForEntity(targetEndpoint + "/", todo, Todo.class);
         Todo result = responseEntity.getBody();
-        LOG.debug("Completed " + targetEndpoint +  " create Todo " + result.toString()
-            + " in " + (System.currentTimeMillis() - now) + " milliseconds.");
+
         return result;
     }
+
+//    @PostMapping("/")
+//    public Todo createTodo(@RequestBody Todo todo) {
+//        long now = System.currentTimeMillis();
+//        LOG.debug("Calling " + targetEndpoint +  " to create Todo " + todo.toString());
+//        ResponseEntity<Todo> responseEntity = this.restTemplate
+//                .postForEntity(targetEndpoint + "/", todo, Todo.class);
+//        Todo result = responseEntity.getBody();
+//        LOG.debug("Completed " + targetEndpoint +  " create Todo " + result.toString()
+//                + " in " + (System.currentTimeMillis() - now) + " milliseconds.");
+//        return result;
+//    }
+
 
     @GetMapping("/")
     public List<Todo> listTodos() {
