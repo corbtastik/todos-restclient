@@ -41,8 +41,7 @@ public class TodosClientAPI {
         ResponseEntity<Todo> responseEntity = this.restTemplate
             .postForEntity(targetEndpoint + "/", todo, Todo.class);
         Todo result = responseEntity.getBody();
-        LOG.debug("Completed " + targetEndpoint +  " create Todo " + result.toString()
-            + " in " + (System.currentTimeMillis() - now) + " milliseconds.");
+
         return result;
     }
 
