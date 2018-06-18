@@ -4,7 +4,11 @@ Howdy and welcome.  This repository contains a Microservice implemented in Sprin
 
 ### Primary dependencies
 
-* Spring Boot Starter Web and that's it :)
+* Spring Boot Starter Web (implement API)
+* Spring Boot Actuators (ops endpoints)
+* Spring Cloud Netflix Eureka Client (service discovery)
+* Spring Cloud Config Client (central config)
+* Spring Cloud Sleuth (request tracing)
 
 This API is part of the [Todo collection](https://github.com/corbtastik/todos-ecosystem) which are part of a larger demo set used in Cloud Native Developer Workshops.
 
