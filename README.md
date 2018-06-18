@@ -42,21 +42,59 @@ Once Todo(s) Rest Client is running we can access it directly using [cURL](https
 
 #### Create a Random Todo
 
-<p align="center">
-    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-restclient/todos-restclient-create.png">
-</p>
+```bash
+> http POST :8006/
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Mon, 18 Jun 2018 19:53:51 GMT
+Transfer-Encoding: chunked
+
+{
+    "completed": false,
+    "id": 4,
+    "title": "todo from restclient"
+}
+```
 
 #### Retrieve one Todo
 
-<p align="center">
-    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-restclient/todos-restclient-retrieve-one.png">
-</p>
+```bash
+> http :8006/4    
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Mon, 18 Jun 2018 19:54:04 GMT
+Transfer-Encoding: chunked
+
+{
+    "completed": false,
+    "id": 4,
+    "title": "todo from restclient"
+}
+```
 
 #### Retrieve all Todo(s)
 
-<p align="center">
-    <img src="https://github.com/corbtastik/todos-images/raw/master/todos-restclient/todos-restclient-retrieve-all.png">
-</p>
+```bash
+> http :8006/ 
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Mon, 18 Jun 2018 19:55:37 GMT
+Transfer-Encoding: chunked
+
+[
+    {
+        "completed": false,
+        "id": 3,
+        "title": "commit readme"
+    },
+    {
+        "completed": false,
+        "id": 4,
+        "title": "todo from restclient"
+    }
+]
+
+```
 
 ### Spring Cloud Ready
 
