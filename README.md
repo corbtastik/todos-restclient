@@ -258,7 +258,9 @@ INFO [todos-restclient,,,] 11641 --- [main] b.c.PropertySourceBootstrapConfigura
 
 Recall we need to tell the Todo(s) RestClient what backend API to call, it defaults to ``localhost:8080`` but we can override ``todos.target.endpoint`` with another API endpoint and Config Server will inject its value on startup.
 
-# cf push...awe yeah
+### Run on PAS
+
+#### cf push...awe yeah
 
 Yes you can go from zero to hero with one command :)
 
