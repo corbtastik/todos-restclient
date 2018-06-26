@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class TodosClientAPI {
 
-    private static Logger LOG = LoggerFactory.getLogger(TodosClientApp.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TodosClientApp.class);
 
     /**
      * RestTemplate HTTP Client - injected in constructor

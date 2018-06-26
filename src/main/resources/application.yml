@@ -16,7 +16,7 @@ management:
 eureka:
   client:
     serviceUrl:
-      defaultZone: 'http://localhost:8761/eureka'
+      defaultZone: http://localhost:8761/eureka/
 todos:
   target:
-    endpoint: 'http://localhost:8080/todos'
+    endpoint: http://localhost:8080/todos
