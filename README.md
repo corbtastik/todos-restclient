@@ -258,4 +258,51 @@ INFO [todos-restclient,,,] 11641 --- [main] b.c.PropertySourceBootstrapConfigura
 
 Recall we need to tell the Todo(s) RestClient what backend API to call, it defaults to ``localhost:8080`` but we can override ``todos.target.endpoint`` with another API endpoint and Config Server will inject its value on startup.
 
+# cf push...awe yeah
+
+Yes you can go from zero to hero with one command :)
+
+Make sure you're in the Todo(s) RestClient project root (folder with ``manifest.yml``) and cf push...awe yeah!
+
+```bash
+> cf push --vars-file ./vars.yml
+```
+
+```bash
+> cf app todos-restclient  
+Showing health and status for app todos-restclient in org bubbles / space dev as ...
+
+name:              todos-restclient
+requested state:   started
+instances:         1/1
+usage:             1G x 1 instances
+routes:            todos-restclient.cfapps.io
+last uploaded:     Tue 26 Jun 14:04:04 CDT 2018
+stack:             cflinuxfs2
+buildpack:         java_buildpack
+
+     state     since                  cpu    memory         disk           details
+#0   running   2018-06-26T19:05:18Z   0.3%   369.1M of 1G   165.5M of 1G
+```  
+
+### Verify on Cloud   
+
+Once Todo(s) RestClient is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/info`` to make sure the app has versioning.
+
+```bash
+> http todos-restclient.cfapps.io/ops/info
+HTTP/1.1 200 OK
+Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
+X-Vcap-Request-Id: 059abe96-5825-401b-7ab2-fc697fb5f15a
+
+{
+    "build": {
+        "artifact": "todos-restclient",
+        "group": "io.corbs",
+        "name": "todos-restclient",
+        "time": "2018-06-26T19:01:58.797Z",
+        "version": "1.0.0.SNAP"
+    }
+}
+```  
 
