@@ -8,3 +8,4 @@ applications:
   buildpack: java_buildpack
   env:
     ((env-key-1)): ((env-val-1))
+    ((env-key-2)): ((env-val-2))
