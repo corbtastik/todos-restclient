@@ -3,11 +3,16 @@ package io.corbs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static java.lang.String.format;
 
 @RestController
 public class TodoClientAPI {
@@ -35,7 +40,17 @@ public class TodoClientAPI {
 
     @GetMapping("/{id}")
     public Todo retrieve(@PathVariable Integer id) {
-        return restTemplate.getForObject("/todos/{id}", Todo.class, id);
+        Todo todo;
+        try {
+            todo = restTemplate.getForObject("/todos/{id}", Todo.class, id);
+        } catch (HttpClientErrorException ex)   {
+            if (HttpStatus.NOT_FOUND != ex.getStatusCode()) {
+                throw ex;
+            }
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, format("todo.id=%d", id));
+        }
+
+        return todo;
     }
 
     @DeleteMapping("/")
@@ -50,7 +65,17 @@ public class TodoClientAPI {
 
     @PatchMapping("/{id}")
     public Todo update(@PathVariable Integer id, @RequestBody Todo todo) {
-        return this.restTemplate.patchForObject("/todos/{id}", todo, Todo.class, id);
+        Todo updated;
+        try {
+            updated = this.restTemplate.patchForObject("/todos/{id}", todo, Todo.class, id);
+        } catch (HttpClientErrorException ex)   {
+            if (HttpStatus.NOT_FOUND != ex.getStatusCode()) {
+                throw ex;
+            }
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, format("todo.id=%d", id));
+        }
+
+        return updated;
     }
     
 }

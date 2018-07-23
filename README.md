@@ -2,22 +2,12 @@
 
 Howdy and welcome.  This repository contains a Microservice implemented in Spring Boot and highlighting use of RestTemplate as a client to call APIs.  This Microservice forwards calls to a backing API using RestTemplate, its part of a larger [Todo(s) EcoSystem](https://github.com/corbtastik/todos-ecosystem) demo set of apps each highlighting a unique aspect of Spring Boot, Spring Cloud and Pivotal Application Service.
 
-### Primary dependencies
-
-* Spring Boot Starter Web (implement API)
-* Spring Boot Actuators (ops endpoints)
-* Spring Cloud Netflix Eureka Client (service discovery)
-* Spring Cloud Config Client (central config)
-* Spring Cloud Sleuth (request tracing)
-
-This API is part of the [Todo collection](https://github.com/corbtastik/todos-ecosystem) which are part of a larger demo set used in Cloud Native Developer Workshops.
-
-This example will create a random Todo and forward to the backing [Todo(s) API](https://github.com/corbtastik/todos-ui) Microservice to actually save.  This example shows the basic way to use ``RestTemplate`` to call an HTTP endpoint.  If your new to Spring Boot then this is a good sample to show how to use ``RestTemplate``, if you're a seasoned Spring Boot developer then you more than likely know this.  It's also worth noting ``RestTemplate`` is the classic way to call HTTP endpoint in Spring but with the release of Spring Boot 2.0 I'd encourage using ``WebClient`` over ``RestTemplate``.  The [Todo(s) WebClient](https://github.com/corbtastik/todos-webclient) Microservice mirrors this Microservice except it uses WebClient.
-
 ### API operations
 
-1. **C**reate a Random Todo
+1. **C**reate a Todo
 2. **R**etrieve one or more Todo(s)
+3. **U**pdate one Todo
+4. **D**elete one Todo
 
 ### Build
 
@@ -114,7 +104,7 @@ spring:
     name: todos-restclient
   cloud:
     config:
-      uri: ${SPRING_CONFIG_URI:http://localhost:8888}
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8888}
 ```
 
 #### 2) Spring Cloud Eureka Client : Participate in service discovery
@@ -287,7 +277,7 @@ buildpack:         java_buildpack
 #0   running   2018-06-26T19:05:18Z   0.3%   369.1M of 1G   165.5M of 1G
 ```  
 
-### Verify on Cloud   
+### Verify on Cloud  
 
 Once Todo(s) RestClient is running, use an HTTP Client such as [cURL](https://curl.haxx.se/) or [HTTPie](https://httpie.org/) and call ``/ops/info`` to make sure the app has versioning.
 
@@ -307,4 +297,3 @@ X-Vcap-Request-Id: 059abe96-5825-401b-7ab2-fc697fb5f15a
     }
 }
 ```  
-

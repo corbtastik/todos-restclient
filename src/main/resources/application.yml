@@ -3,7 +3,7 @@ spring:
     name: todos-restclient
 logging:
   level:
-    io.corbs: INFO
+    io.corbs: DEBUG
 server:
   port: 8006
 management:
