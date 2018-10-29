@@ -28,13 +28,13 @@ public class TodoClientAPI {
 
     @PostMapping("/")
     public Todo createTodo(@RequestBody Todo todo) {
-        ResponseEntity<Todo> responseEntity = this.restTemplate.postForEntity("/todos/", todo, Todo.class);
+        ResponseEntity<Todo> responseEntity = this.restTemplate.postForEntity("/", todo, Todo.class);
         return responseEntity.getBody();
     }
 
     @GetMapping("/")
     public List<Todo> retrieve() {
-        ResponseEntity<List> responseEntity = this.restTemplate.getForEntity("/todos/", List.class);
+        ResponseEntity<List> responseEntity = this.restTemplate.getForEntity("/", List.class);
         return responseEntity.getBody();
     }
 
@@ -42,7 +42,7 @@ public class TodoClientAPI {
     public Todo retrieve(@PathVariable Integer id) {
         Todo todo;
         try {
-            todo = restTemplate.getForObject("/todos/{id}", Todo.class, id);
+            todo = restTemplate.getForObject("/{id}", Todo.class, id);
         } catch (HttpClientErrorException ex)   {
             if (HttpStatus.NOT_FOUND != ex.getStatusCode()) {
                 throw ex;
@@ -55,19 +55,19 @@ public class TodoClientAPI {
 
     @DeleteMapping("/")
     public void delete() {
-        this.restTemplate.delete("/todos/");
+        this.restTemplate.delete("/");
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        this.restTemplate.delete("/todos/{id}", id);
+        this.restTemplate.delete("/{id}", id);
     }
 
     @PatchMapping("/{id}")
     public Todo update(@PathVariable Integer id, @RequestBody Todo todo) {
         Todo updated;
         try {
-            updated = this.restTemplate.patchForObject("/todos/{id}", todo, Todo.class, id);
+            updated = this.restTemplate.patchForObject("/{id}", todo, Todo.class, id);
         } catch (HttpClientErrorException ex)   {
             if (HttpStatus.NOT_FOUND != ex.getStatusCode()) {
                 throw ex;
